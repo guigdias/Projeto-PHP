@@ -1,0 +1,21 @@
+<?php
+try
+{
+    $username = "root";
+    $password = "";
+    $dbh = new PDO('mysql:host=localhost;dbname=projetopoo', $username, $password);
+    
+    $query = $dbh->query("select vagas.vaga_id, vagas.vaga_nome, vagas.vaga_descricao, usuarios.users_uid
+    from vagas, usuarios where vagas.users_id = usuarios.users_id;");
+    foreach ($query as $dados)
+    {
+        echo "ID da vaga: " .$dados[0] ."<br>". "Nome da vaga: ". $dados[1] . "<br>". "Descrição da vaga: " . $dados[2]. "<br>"
+        . "Anuciante: ". $dados[3] . "<br><hr>";
+    }
+}
+catch(PDOException $e)
+{
+    print "Error!: ". $e->getMessage(). "<br/>";
+    die();
+}
+?>

@@ -1,0 +1,26 @@
+<?php
+        try
+        { $username = "root"; $password = ""; $dbh = new PDO('mysql:host=localhost;dbname=projetopoo', $username, $password);
+          $id = $_SESSION["userid"];
+          $query = $dbh->query("SELECT * from vagas where users_id = '$id';");
+          foreach ($query as $dados)
+          {
+          echo $dados[1] . "<br>". $dados[2]. "<br>"."<hr>";
+          }
+        }
+        catch(PDOException $e)
+        {
+        print "Error!: ". $e->getMessage(). "<br/>";
+        die();
+        }
+      ?>
+
+<nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.php">Home</a></li>
+   
+    <li><a href="perfil.php"><?php echo $_SESSION["useruid"];?></a></li>
+    <li><a href="vagas.php">Vagas</a></li>
+    <li><a href="./includes/logout.inc.php">LOGOUT</a></li>
+        </ul>
+      </nav>
